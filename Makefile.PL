@@ -1,4 +1,4 @@
-use 5.008003;
+use 5.022;
 use strict;
 use warnings;
 use ExtUtils::MakeMaker;
@@ -9,7 +9,7 @@ my %WriteMakefileArgs = (
     VERSION_FROM     => 'lib/SION.pm',
     ABSTRACT_FROM    => 'lib/SION.pm',
     LICENSE          => 'artistic_2',
-    MIN_PERL_VERSION => '5.008003',
+    MIN_PERL_VERSION => '5.022',    # sprintf '%a' for hexadecimal floats
     CONFIGURE_REQUIRES => {
         'ExtUtils::MakeMaker' => '0',
     },
@@ -17,12 +17,31 @@ my %WriteMakefileArgs = (
         'Test::More' => '0',
     },
     PREREQ_PM => {
-        #'ABC'              => '1.6',
-        #'Foo::Bar::Module' => '5.0401',
+        'B'            => '0',
+        'Carp'         => '0',
+        'Encode'       => '0',
+        'Exporter'     => '0',
+        'JSON::PP'     => '2.27300',
+        'MIME::Base64' => '0',
+        'POSIX'        => '0',
+        'Scalar::Util' => '0',
+    },
+    META_MERGE => {
+        'meta-spec' => { version => 2 },
+        resources   => {
+            repository => {
+                type => 'git',
+                url  => 'https://github.com/dankogai/p5-sion.git',
+                web  => 'https://github.com/dankogai/p5-sion',
+            },
+        },
     },
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean => { FILES => 'SION-*' },
 );
+
+delete $WriteMakefileArgs{META_MERGE}
+    unless eval { ExtUtils::MakeMaker->VERSION('6.46'); 1 };
 
 # Compatibility with old versions of ExtUtils::MakeMaker
 unless (eval { ExtUtils::MakeMaker->VERSION('6.64'); 1 }) {
