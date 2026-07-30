@@ -1,8 +1,11 @@
 name: CI
 
 on:
+  workflow_dispatch:
   push:
+    tags: [ '*.*' ]
   pull_request:
+    branches: [ main ]
 
 jobs:
   test:
@@ -11,7 +14,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest]
-        perl: ['5.22', '5.32', '5.38', '5.40']
+        perl: ['5.42', '5.40', '5.38', '5.22']
     name: perl ${{ matrix.perl }} on ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
