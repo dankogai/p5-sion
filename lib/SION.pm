@@ -780,11 +780,11 @@ You can also look for information at:
 
 =over 4
 
-=item * RT: CPAN's request tracker (report bugs here)
+=item * GitHub
 
-L<https://rt.cpan.org/NoAuth/Bugs.html?Dist=SION>
+L<https://github.com/dankogai/p5-sion>
 
-=item * Search CPAN
+=item * CPAN
 
 L<https://metacpan.org/release/SION>
 
